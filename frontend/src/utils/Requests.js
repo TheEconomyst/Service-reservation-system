@@ -14,6 +14,20 @@ export class Requests {
             cookies.set("Authorization", results.data.token, {path:'/'});
             return true;
         }).catch(error=>{
+            console.log(error.response)
+            return false;
+        });
+    }
+    static async login(email, password) {
+        AxiosInterface.post('/login',{
+            email: email,
+            password: password
+        }).then(results=>{
+            console.log(results);
+            cookies.set("Authorization", results.data.token, {path:'/'});
+            return true;
+        }).catch(error=>{
+            console.log(error.response)
             return false;
         });
     }

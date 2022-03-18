@@ -21,25 +21,28 @@ export const Register = () => {
 
     const validate = ()=>
     {
+        setErrors([]);
+        let errstatus = true;
         if(email==="")
         {
-            setErrors(old=>[...old, "Neįvestas el paštas"]);
-            return true;
+            setErrors((old)=>[...old, "Neįvestas el paštas"]);
+            errstatus=false;
         }
         if(password==="")
         {
-            setErrors(old=>[...old, "Neįvestas el paštas"]);
-            return true;
+            setErrors(old=>[...old, "Neįvestas slaptažodis"]);
+            errstatus=false;
         }
         if(password!==repeatPwd)
         {
             setErrors(old=>[...old, "Slaptažodžiai nesutampa"]);
-            return false;
+            errstatus=false;
         }
-        return true;
+        console.log(errors);
+        return errstatus;
     }
-    if(cookies.get("Authorization")!==undefined) window.location.href = "http://localhost:3000/"
-    return (
+    if(cookies.get("Authorization")!==undefined)
+    return(
         <div
             style={{
                 height: "100vh",
@@ -51,7 +54,24 @@ export const Register = () => {
                 backgroundColor: "#aaaaaa",
             }}
         >
-            <ErrorBox title={"Klaida registruojantis"} errors={errors}/>
+            <Typography>
+                JAU ESATE PRISIREGISTRAVĘS
+            </Typography>
+        </div>
+    )
+    else return (
+        <div
+            style={{
+                height: "100vh",
+                width: "100vw",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#aaaaaa",
+            }}
+        >
+            {errors===[]?<></>:<ErrorBox title={"Klaida registruojantis"} errors={errors}/>}
             <Paper elevation={2} style={{ padding: "20px", minWidth: "50vw" }}>
                 <Typography variant={"h4"}>REGISTRUOTIS</Typography>
                 <div style={{ marginTop: "20px", display:'flex', flexDirection:'column' }}>

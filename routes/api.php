@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 //public routai eina cia
 Route::post('/register', [\App\Http\Controllers\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'login']);
+Route::get('/test', [\App\Http\Controllers\AuthController::class, 'test']);
 
 Route::group(['middleware'=>['auth:sanctum']], function(){
     //routai kuriem reikia autho eina cia
