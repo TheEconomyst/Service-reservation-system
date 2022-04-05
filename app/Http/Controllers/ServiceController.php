@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ServiceController extends Controller
 {
@@ -14,8 +15,8 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services = Service::orderBy('title', 'desc');
-        return view('services.index')->with('services', $services);
+        $services = Service::all();
+        return response($services, Response::HTTP_OK);
     }
 
     /**
@@ -25,7 +26,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return view('services.create');
+        //
     }
 
     /**
@@ -36,88 +37,61 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'duration' => 'required',
-            'price' => 'required',
-            'is_active' => 'required'
+        $fields = $request->validate([
+            "name"=>"required|string",
+            "is_active"=>"required",
+            "description"=>"required|string"
         ]);
-
-        $service = new Service;
-        $service->title = $request->input('text');
-        $service->description = $request->input('text');
-        $service->duration= $request->input('number');
-        $service->price = $request->input('number');
-        $service->is_active = $request->input('radio');
-
-        $service->save();
-        return redirect('/services')->with('success', 'Profile is is successfully created!');
+        $service = new Service([
+            "name"=>$fields['name'],
+            "is_active"=>$fields['is_active'],
+            "description"=>$fields["description"]
+        ]);
+        if($service->save()) return response(["status"=>"ok", "service"=>$service], Response::HTTP_CREATED);
+        return response(["status"=>"error"], Response::HTTP_CONFLICT);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service $service
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $service = Service::find($id);
-        return view('services.show')->with('service', $service);
+        if($service==null) return response(["status"=>"not_found"], Response::HTTP_NOT_FOUND);
+        return response(["status"=>"ok", "service"=>$service], Response::HTTP_OK);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function update(Request $request)
     {
-        $service = Service::find($id);
-        return view('services.edit')->with('service', $service);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service $service
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        
-        $this->validate($request, [
-            'title' => 'required',
-            'description' => 'required',
-            'duration' => 'required',
-            'price' => 'required',
-            'is_active' => 'required'
+        $fields = $request->validate([
+            "name"=>"required|string",
+            "is_active"=>"required",
+            "description"=>"required|string",
+            "id"=>"required|numeric"
         ]);
-
-        $service = new Service;
-        $service->title = $request->input('text');
-        $service->description = $request->input('text');
-        $service->duration= $request->input('number');
-        $service->price = $request->input('number');
-        $service->is_active = $request->input('radio');
-
-        $service->save();
-        return redirect('/services')->with('success', 'Profile is is successfully created!');
+        if(($service=Service::find($request->id))!=null)
+        {
+            $service->update([
+                "name"=>$fields['name'],
+                "is_active"=>$fields['is_active'],
+                "description"=>$fields["description"]
+            ]);
+            return response(["status"=>"ok"], Response::HTTP_OK);
+        }
+        return response(["status"=>"not_found"], Response::HTTP_NOT_FOUND);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service $service
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $service = Service::find($id);
-        $service->delete();
-        return redirect('/services')->with('success', 'Service is successfully deleted!');
+        Service::destroy($id);
+        return response(["status"=>"ok"], Response::HTTP_OK);
     }
 }

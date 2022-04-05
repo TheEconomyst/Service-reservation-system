@@ -7,9 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    protected $table = 'service';
-    protected $fillable = ['title', 'description', 'duration', 'price', 'is_active'];
-    protected $primary = 'id';
-    public $timestamps = false;
+    protected $fillable = [
+        "name",
+        "is_active",
+        "description"
+    ];
     use HasFactory;
 }
