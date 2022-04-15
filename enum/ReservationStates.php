@@ -1,0 +1,7 @@
+<?php
+
+define('RESERVATION_COMPLETED', 1);
+define('RESERVATION_READY', 2);
+define('RESERVATION_CANCELLED', 3);
+
+?>
