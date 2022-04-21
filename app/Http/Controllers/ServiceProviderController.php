@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ServiceProviderController extends Controller
 {
@@ -14,7 +15,8 @@ class ServiceProviderController extends Controller
      */
     public function index()
     {
-        //
+        $serviceProviders = ServiceProvider::all();
+        return response($serviceProviders, Response::HTTP_OK);
     }
 
     /**
@@ -22,9 +24,26 @@ class ServiceProviderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'description' => 'required|string',
+            'is_company_admin' => 'required|boolean',
+            'user_id' => 'required|numeric'
+        ]);
+
+        $provider = new ServiceProvider([
+            'description' => $request['description'],
+            'is_company_admin' => $fields['is_company_admin'],
+            'user_id' => $fields['user_id'],
+            'is_active' => true
+        ]);
+
+        if ($provider->save()) {
+            return response($provider, Response::HTTP_CREATED);
+        } else {
+            return response('', Response::HTTP_CONFLICT);
+        }
     }
 
     /**
@@ -44,9 +63,15 @@ class ServiceProviderController extends Controller
      * @param  \App\Models\ServiceProvider  $serviceProvider
      * @return \Illuminate\Http\Response
      */
-    public function show(ServiceProvider $serviceProvider)
+    public function show($id)
     {
-        //
+        $provider = ServiceProvider::find($id);
+
+        if ($provider == null) {
+            return response('', Response::HTTP_NOT_FOUND);
+        } else {
+            return response($provider, Response::HTTP_OK);
+        }
     }
 
     /**
@@ -78,8 +103,8 @@ class ServiceProviderController extends Controller
      * @param  \App\Models\ServiceProvider  $serviceProvider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ServiceProvider $serviceProvider)
+    public function destroy($id)
     {
-        //
+        ServiceProvider::find($id)->delete();
     }
 }

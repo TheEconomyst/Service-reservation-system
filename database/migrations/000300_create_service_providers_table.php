@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('description');
             $table->boolean('is_company_admin');
             $table->boolean('is_active');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')->unique()->constrained('users');
         });
     }
 

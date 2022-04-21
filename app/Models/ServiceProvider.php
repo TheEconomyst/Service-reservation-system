@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceProvider extends Model
 {
     use HasFactory;
+
+    protected $table = 'service_providers';
+
+    protected $fillable = [
+        'description',
+        'is_company_admin',
+        'is_active',
+        'user_id'
+    ];
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
 }

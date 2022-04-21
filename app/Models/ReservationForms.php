@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class ReservationForms extends Model
 {
     use HasFactory;
+
+    $table = 'reservation_forms';
+
+    $fillable = [
+        'name'
+    ];
+
+    public function form_fields() {
+        return $this->hasMany('form_fields');
+    }
 }
