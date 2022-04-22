@@ -14,7 +14,8 @@ class Service extends Model
     protected $fillable = [
         "name",
         "is_active",
-        "description"
+        "description",
+        "company_id"
     ];
 
     public function company() {

@@ -40,12 +40,14 @@ class ServiceController extends Controller
         $fields = $request->validate([
             "name"=>"required|string",
             "is_active"=>"required",
-            "description"=>"required|string"
+            "description"=>"required|string",
+            "company_id"=>"required"
         ]);
         $service = new Service([
-            "name"=>$fields['name'],
-            "is_active"=>$fields['is_active'],
-            "description"=>$fields["description"]
+            "name"=>$request['name'],
+            "is_active"=>$request['is_active'],
+            "description"=>$request["description"],
+            "company_id"=>$request["company_id"]
         ]);
         if($service->save()) return response(["status"=>"ok", "service"=>$service], Response::HTTP_CREATED);
         return response(["status"=>"error"], Response::HTTP_CONFLICT);
@@ -69,14 +71,16 @@ class ServiceController extends Controller
             "name"=>"required|string",
             "is_active"=>"required",
             "description"=>"required|string",
-            "id"=>"required|numeric"
+            "id"=>"required|numeric",
+            "company_id"=>"required"
         ]);
         if(($service=Service::find($request->id))!=null)
         {
             $service->update([
-                "name"=>$fields['name'],
-                "is_active"=>$fields['is_active'],
-                "description"=>$fields["description"]
+                "name"=>$request['name'],
+                "is_active"=>$request['is_active'],
+                "description"=>$request["description"],
+                "company_id"=>$request["company_id"]
             ]);
             return response(["status"=>"ok"], Response::HTTP_OK);
         }

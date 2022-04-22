@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Companies;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
@@ -14,7 +15,8 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        //
+        $arr = Companies::all();
+        return response($arr, Response::HTTP_OK);
     }
 
     /**
