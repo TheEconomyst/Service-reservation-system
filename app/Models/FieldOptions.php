@@ -13,7 +13,9 @@ class FieldOptions extends Model
 
     protected $fillable = [
         'text_option',
-        'integer_option'
+        'integer_option',
+        'reservation_id',
+        'form_field_id'
     ];
 
     public function formField() {

@@ -13,7 +13,8 @@ class WorkSchedule extends Model
 
     protected $fillable = [
         'time_from',
-        'time_to'
+        'time_to',
+        'service_provider_id'
     ];
 
     public function service_provider() {

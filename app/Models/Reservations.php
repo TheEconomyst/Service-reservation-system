@@ -13,7 +13,8 @@ class Reservations extends Model
 
     protected $fillable = [
         'creation_date',
-        'price'
+        'price',
+        'provider_service_id'
     ];
 
     public function providerService() {
