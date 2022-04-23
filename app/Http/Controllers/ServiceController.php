@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -38,49 +39,43 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            "name"=>"required|string",
-            "is_active"=>"required",
-            "description"=>"required|string",
-            "company_id"=>"required"
+            "name" => "required|string",
+            "is_active" => "required",
+            "description" => "required|string",
+            "company_id" => "required"
         ]);
+
         $service = new Service([
-            "name"=>$request['name'],
-            "is_active"=>$request['is_active'],
-            "description"=>$request["description"],
-            "company_id"=>$request["company_id"]
+            "name" => $request['name'],
+            "is_active" => $request['is_active'],
+            "description" => $request["description"],
+            "company_id" => $request["company_id"]
         ]);
-        if($service->save()) return response(["status"=>"ok", "service"=>$service], Response::HTTP_CREATED);
-        return response(["status"=>"error"], Response::HTTP_CONFLICT);
+
+        return Crud::saveModel($service, 'service');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Service  $service
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $service = Service::find($id);
-        if($service==null) return response(["status"=>"not_found"], Response::HTTP_NOT_FOUND);
-        return response(["status"=>"ok", "service"=>$service], Response::HTTP_OK);
+        return Crud::showModel(Service::find($id), 'service');
     }
+
     public function update(Request $request)
     {
         $fields = $request->validate([
-            "name"=>"required|string",
-            "is_active"=>"required",
-            "description"=>"required|string",
-            "id"=>"required|numeric",
-            "company_id"=>"required"
+            "name" => "required|string",
+            "is_active" => "required",
+            "description" => "required|string",
+            "id" => "required|numeric",
+            "company_id" => "required"
         ]);
-        if(($service=Service::find($request->id))!=null)
-        {
+
+        if (($service=Service::find($request->id))!=null) {
             $service->update([
-                "name"=>$request['name'],
-                "is_active"=>$request['is_active'],
-                "description"=>$request["description"],
-                "company_id"=>$request["company_id"]
+                "name" => $request['name'],
+                "is_active" => $request['is_active'],
+                "description" => $request["description"],
+                "company_id" => $request["company_id"]
             ]);
             return response(["status"=>"ok"], Response::HTTP_OK);
         }
