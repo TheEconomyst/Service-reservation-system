@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Util\Crud;
 use App\Models\Companies;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
 class CompaniesController extends Controller
