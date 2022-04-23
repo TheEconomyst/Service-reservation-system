@@ -26,10 +26,10 @@ class Crud
     public static function destroyModel($model)
     {
         if ($model === null) {
-            return response(['status' => 'ok'], Response::HTTP_NOT_FOUND);
+            return response(['status' => 'error'], Response::HTTP_NOT_FOUND);
         } else {
             $model->delete();
-            return response(['status' => 'error'], Response::HTTP_OK);
+            return response(['status' => 'ok'], Response::HTTP_OK);
         }
     }
 
