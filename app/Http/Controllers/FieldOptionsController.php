@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\FieldOptions;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,7 @@ class FieldOptionsController extends Controller
         ]);
 
         if ($fields['text_option'] === null && $fields['integer_option'] === null) {
-            return respondInvalidFormData(
+            return Crud::respondInvalidFormData(
                     "At least one of the following must be set:"
                 .   " text option or integer option"
             );
