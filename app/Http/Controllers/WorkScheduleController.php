@@ -25,6 +25,16 @@ class WorkScheduleController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $fields = $request->validate([
             'time_from' => 'required|numeric',
             'time_to' => 'required|numeric',
@@ -38,17 +48,6 @@ class WorkScheduleController extends Controller
         ]);
 
         return Crud::saveModel($workSchedule);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**

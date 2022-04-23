@@ -27,6 +27,16 @@ class ServiceProviderController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $fields = $request->validate([
             'description' => 'required|string',
             'is_company_admin' => 'required|boolean',
@@ -41,17 +51,6 @@ class ServiceProviderController extends Controller
         ]);
 
         return Crud::saveModel($provider);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
