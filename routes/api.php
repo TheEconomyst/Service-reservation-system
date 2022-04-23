@@ -45,9 +45,9 @@ Route::post('/companies', [CompaniesController::class, 'store']);
 Route::delete('/companies/{id}', [CompaniesController::class, 'destroy']);
 
 Route::get('/field_choices', [FieldChoicesController::class, 'index']);
-Route::get('/companies/{id}', [FieldChoicesController::class, 'show']);
-Route::post('/companies', [FieldChoicesController::class, 'store']);
-Route::delete('/companies/{id}', [FieldChoicesController::class, 'destroy']);
+Route::get('/field_choices/{id}', [FieldChoicesController::class, 'show']);
+Route::post('/field_choices', [FieldChoicesController::class, 'store']);
+Route::delete('/field_choices/{id}', [FieldChoicesController::class, 'destroy']);
 
 Route::get('/reservations', [ReservationsController::class, 'index']);
 Route::get('/reservations/{id}', [ReservationsController::class], 'show');

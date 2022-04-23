@@ -32,7 +32,10 @@ class FieldOptionsController extends Controller
         ]);
 
         if ($fields['text_option'] === null && $fields['integer_option'] === null) {
-            return response(['status' => 'error'], Response::HTTP_CONFLICT);
+            return respondInvalidFormData(
+                    "At least one of the following must be set:"
+                .   " text option or integer option"
+            );
         }
 
         $fieldOption = new FieldOptions([
