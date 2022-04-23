@@ -17,15 +17,15 @@ class FormFields extends Model
         'is_mandatory',
     ];
 
-    public function reservation_form() {
+    public function reservationForm() {
         return $this->belongsTo(ReservationForms::class);
     }
 
-    public function form_field_options() {
+    public function formFieldOptions() {
         return $this->hasMany(FieldOptions::class);
     }
 
-    public function form_field_choices() {
+    public function formFieldChoices() {
         return $this->hasMany(FieldChoices::class);
     }
 }

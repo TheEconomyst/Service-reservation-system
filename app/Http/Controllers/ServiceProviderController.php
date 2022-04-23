@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -39,11 +40,7 @@ class ServiceProviderController extends Controller
             'is_active' => true
         ]);
 
-        if ($provider->save()) {
-            return response($provider, Response::HTTP_CREATED);
-        } else {
-            return response('', Response::HTTP_CONFLICT);
-        }
+        return Crud::saveModel($provider);
     }
 
     /**
@@ -65,13 +62,7 @@ class ServiceProviderController extends Controller
      */
     public function show($id)
     {
-        $provider = ServiceProvider::find($id);
-
-        if ($provider == null) {
-            return response('', Response::HTTP_NOT_FOUND);
-        } else {
-            return response($provider, Response::HTTP_OK);
-        }
+        return Crud::showModel(ServiceProvider::find($id));
     }
 
     /**
@@ -105,6 +96,6 @@ class ServiceProviderController extends Controller
      */
     public function destroy($id)
     {
-        ServiceProvider::find($id)->delete();
+        return Crud::destroyModel(ServiceProvider::find($id));
     }
 }

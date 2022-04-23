@@ -1,7 +1,10 @@
 <?php
 
+require_once('enum/ReservationStates.php');
+
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\Reservations;
 use Illuminate\Http\Request;
 
@@ -14,7 +17,8 @@ class ReservationsController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservations::all();
+        return response($reservations, Response::HTTP_OK);
     }
 
     /**
@@ -22,9 +26,9 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        /* TODO */
     }
 
     /**
@@ -35,7 +39,15 @@ class ReservationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            "price" => "decimal|required"
+        ]);
+
+        $reservation = new Reservations([
+            "price" => $fields["price"]
+        ]);
+
+        return Crud::saveModel($reservation);
     }
 
     /**
@@ -44,9 +56,9 @@ class ReservationsController extends Controller
      * @param  \App\Models\Reservations  $reservations
      * @return \Illuminate\Http\Response
      */
-    public function show(Reservations $reservations)
+    public function show($id)
     {
-        //
+        return Crud::showModel(Reservations::find($id));
     }
 
     /**
@@ -78,8 +90,8 @@ class ReservationsController extends Controller
      * @param  \App\Models\Reservations  $reservations
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reservations $reservations)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(Reservations::find($id));
     }
 }

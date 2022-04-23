@@ -15,11 +15,11 @@ class FieldChoices extends Model
         'choice',
     ];
 
-    public function form_field() {
+    public function formField() {
         return $this->belongsTo(FormFields::class);
     }
 
     public function reservation() {
-        return $this->belongsTo(Reservations::class);
+        return $this->belongsToMany(Reservations::class);
     }
 }

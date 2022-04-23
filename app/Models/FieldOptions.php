@@ -16,7 +16,7 @@ class FieldOptions extends Model
         'integer_option'
     ];
 
-    public function form_field() {
+    public function formField() {
         return $this->belongsTo(FormFields::class);
     }
 

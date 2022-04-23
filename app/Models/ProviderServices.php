@@ -14,13 +14,19 @@ class ProviderServices extends Model
     protected $fillable = [
         'duration',
         'price',
+        'service_id',
+        'service_provider_id'
     ];
 
-    public function service_provider() {
+    public function serviceProvider() {
         return $this->belongsTo(ServiceProvider::class);
     }
 
     public function service() {
         return $this->belongsTo(Service::class);
+    }
+
+    public function reservations() {
+        return $this->hasMany(Reservations::class);
     }
 }

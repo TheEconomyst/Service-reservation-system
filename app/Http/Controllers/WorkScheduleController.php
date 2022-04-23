@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class WorkScheduleController extends Controller
      */
     public function index()
     {
-        //
+        return response(WorkSchedule::all(), Response::HTTP_OK);
     }
 
     /**
@@ -44,9 +45,9 @@ class WorkScheduleController extends Controller
      * @param  \App\Models\WorkSchedule  $workSchedule
      * @return \Illuminate\Http\Response
      */
-    public function show(WorkSchedule $workSchedule)
+    public function show($id)
     {
-        //
+        return Crud::showModel(WorkSchedule::find($id));
     }
 
     /**
@@ -78,8 +79,8 @@ class WorkScheduleController extends Controller
      * @param  \App\Models\WorkSchedule  $workSchedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkSchedule $workSchedule)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(WorkSchedule::find($id))
     }
 }

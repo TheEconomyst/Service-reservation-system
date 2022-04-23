@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\FieldChoices;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class FieldChoicesController extends Controller
      */
     public function index()
     {
-        //
+        return response(FieldChoices::all(), Response::HTTP_OK);
     }
 
     /**
@@ -44,9 +45,9 @@ class FieldChoicesController extends Controller
      * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
-    public function show(FieldChoices $fieldChoices)
+    public function show($id)
     {
-        //
+        return Crud::showModel(FieldChoices::find($id));
     }
 
     /**
@@ -78,8 +79,8 @@ class FieldChoicesController extends Controller
      * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FieldChoices $fieldChoices)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(FieldChoices::find($id));
     }
 }

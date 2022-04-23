@@ -21,4 +21,12 @@ class ServiceProvider extends Model
     public function user() {
         return $this->belongsTo(User::class);
     }
+
+    public function workSchedules() {
+        return $this->hasMany(WorkSchedule::class);
+    }
+
+    public function providerServices() {
+        return $this->hasMany(ProviderServices::class);
+    }
 }

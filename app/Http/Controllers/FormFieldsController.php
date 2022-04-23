@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\FormFields;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,7 @@ class FormFieldsController extends Controller
      */
     public function index()
     {
-        $formFields = FormFields::all();
-
-        return response($formFields, Response::HTTP_OK);
+        return response(FormFields::all(), Response::HTTP_OK);
     }
 
     /**
@@ -46,9 +45,9 @@ class FormFieldsController extends Controller
      * @param  \App\Models\FormFields  $formFields
      * @return \Illuminate\Http\Response
      */
-    public function show(FormFields $formFields)
+    public function show($id)
     {
-        //
+        return Crud::showModel(FormFields::find($id));
     }
 
     /**
@@ -82,6 +81,6 @@ class FormFieldsController extends Controller
      */
     public function destroy(FormFields $formFields)
     {
-        //
+        return Crud::destroyModel(FormFields::find($id));
     }
 }

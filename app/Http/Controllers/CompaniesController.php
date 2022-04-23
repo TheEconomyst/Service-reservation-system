@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\Companies;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        //
+        return response(Companies::all(), Response::HTTP_OK);
     }
 
     /**
@@ -44,9 +45,9 @@ class CompaniesController extends Controller
      * @param  \App\Models\Companies  $companies
      * @return \Illuminate\Http\Response
      */
-    public function show(Companies $companies)
+    public function show($id)
     {
-        //
+        return Crud::showModel(Companies::find($id));
     }
 
     /**
@@ -80,6 +81,6 @@ class CompaniesController extends Controller
      */
     public function destroy(Companies $companies)
     {
-        //
+        return Crud::destroyModel(Companies::find($id));
     }
 }

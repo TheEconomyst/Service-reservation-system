@@ -15,7 +15,7 @@ class ReservationForms extends Model
         'name'
     ];
 
-    public function form_fields() {
+    public function formFields() {
         return $this->hasMany('form_fields');
     }
 }

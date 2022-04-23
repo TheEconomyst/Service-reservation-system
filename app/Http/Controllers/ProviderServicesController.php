@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\ProviderServices;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class ProviderServicesController extends Controller
      */
     public function index()
     {
-        //
+        return response(ProviderServices::all(), Response::HTTP_OK);
     }
 
     /**
@@ -44,9 +45,9 @@ class ProviderServicesController extends Controller
      * @param  \App\Models\ProviderServices  $providerServices
      * @return \Illuminate\Http\Response
      */
-    public function show(ProviderServices $providerServices)
+    public function show($id)
     {
-        //
+        return Crud::showModel(ProviderServices::find($id));
     }
 
     /**
@@ -78,8 +79,8 @@ class ProviderServicesController extends Controller
      * @param  \App\Models\ProviderServices  $providerServices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProviderServices $providerServices)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(ProviderServices::find($id));
     }
 }

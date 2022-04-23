@@ -16,7 +16,7 @@ class Reservations extends Model
         'price'
     ];
 
-    public function provider_service() {
+    public function providerService() {
         return $this->belongsTo(ProviderServices::class);
     }
 
@@ -24,5 +24,11 @@ class Reservations extends Model
         return $this->belongsTo(Service::class);
     }
 
-    /* TODO */
+    public function fieldChoices() {
+        return $this->belongsToMany(FieldChoices::class);
+    }
+
+    public function fieldOptions() {
+        return $this->belongsTo(FieldOptions::class);
+    }
 }
