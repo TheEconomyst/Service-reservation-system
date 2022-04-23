@@ -25,6 +25,16 @@ class FormFieldsController extends Controller
      */
     public function create(Request $request)
     {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
         $fields = $request->validate([
             'name' => 'required|string',
             'field_type' => 'required|numeric',
@@ -48,17 +58,6 @@ class FormFieldsController extends Controller
         ]);
 
         return Crud::saveModel($formField);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
