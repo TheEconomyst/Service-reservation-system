@@ -34,7 +34,9 @@ class FormFieldsController extends Controller
         ]);
 
         if (!isValidAttachedDataType($fields['attached_data_type'])) {
-            return invalidCreationDataResponse();
+            return Crud::respondInvalidFormData(
+                'Attached data type value does not conform to enum. Must be 0 or 1.'
+            );
         }
 
         $formField = new FormFields([

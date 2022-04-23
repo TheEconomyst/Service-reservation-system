@@ -3,8 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\CompaniesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompaniesController;
+use App\Http\Controllers\FieldChoicesController;
+use App\Http\Controllers\FieldOptionsController;;
+use App\Http\Controllers\ProviderServices;
 use App\Http\Controllers\ReservationFormsController;
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\ServiceController;
@@ -48,6 +51,21 @@ Route::get('/field_choices', [FieldChoicesController::class, 'index']);
 Route::get('/field_choices/{id}', [FieldChoicesController::class, 'show']);
 Route::post('/field_choices', [FieldChoicesController::class, 'store']);
 Route::delete('/field_choices/{id}', [FieldChoicesController::class, 'destroy']);
+
+Route::get('/field_options', [FieldOptionsController::class, 'index']);
+Route::get('/field_options/{id}', [FieldOptionsController::class, 'show']);
+Route::post('/field_options', [FieldOptionsController::class, 'store']);
+Route::delete('/field_options/{id}', [FieldOptionsController::class, 'destroy']);
+
+Route::get('/form_fields', [FormFieldsController::class, 'index']);
+Route::get('/form_fields/{id}', [FormFieldsController::class, 'show']);
+Route::post('/form_fields', [FormFieldsController::class, 'store']);
+Route::delete('/form_fields/{id}', [FormFieldsController::class, 'destroy']);
+
+Route::get('/provider_services', [ProviderServices::class, 'index']);
+Route::get('/provider_services/{id}', [ProviderServices::class, 'show']);
+Route::post('/provider_services', [ProviderServices::class, 'store']);
+Route::delete('/provider_services/{id}', [ProviderServices::class, 'destroy']);
 
 Route::get('/reservations', [ReservationsController::class, 'index']);
 Route::get('/reservations/{id}', [ReservationsController::class], 'show');
