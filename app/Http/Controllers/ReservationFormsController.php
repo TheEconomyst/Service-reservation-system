@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Util\Crud;
 use App\Models\ReservationForms;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,7 @@ class ReservationFormsController extends Controller
      */
     public function index()
     {
-        $forms = ReservationForms::all();
-
-        return response($forms, Response::HTTP_OK);
+        return response(ReservationForms::all(), Response::HTTP_OK);
     }
 
     /**
@@ -45,18 +44,7 @@ class ReservationFormsController extends Controller
             "name" => $fields["name"]
         ]);
 
-        if ($form->save()) {
-            return response([
-                    "status" => "ok",
-                    "form" => $form
-                ], Response::HTTP_OK
-            );
-        } else {
-            return response([
-                "status" => "error",
-                ], Response::HTTP_CONFLICT
-            );
-        }
+        return Crud::saveModel($form, 'form');
     }
 
     /**
@@ -65,9 +53,9 @@ class ReservationFormsController extends Controller
      * @param  \App\Models\ReservationForms  $reservationForms
      * @return \Illuminate\Http\Response
      */
-    public function show(ReservationForms $reservationForms)
+    public function show($id)
     {
-        //
+        return Crud::showModel(ReservationForms::find($id));
     }
 
     /**
@@ -99,8 +87,8 @@ class ReservationFormsController extends Controller
      * @param  \App\Models\ReservationForms  $reservationForms
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReservationForms $reservationForms)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(ReservationForms::find($id));
     }
 }

@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger('field_type');
             $table->boolean('is_mandatory');
-            // I have multiple questions.
-            // $table->integer('attached_data');
+            $table->integer('attached_data_type');
             $table->foreignId('reservation_form_id')->constrained('reservation_forms');
         });
     }

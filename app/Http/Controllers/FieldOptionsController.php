@@ -14,7 +14,7 @@ class FieldOptionsController extends Controller
      */
     public function index()
     {
-        //
+        return response(FieldOptions::all(), Response::HTTP_OK);
     }
 
     /**
@@ -22,9 +22,27 @@ class FieldOptionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'text_option' => 'string',
+            'integer_option' => 'numeric',
+            'reservation_id' => 'required|numeric',
+            'form_field_id' => 'required|numeric'
+        ]);
+
+        if ($fields['text_option'] === null && $fields['integer_option'] === null) {
+            return response(['status' => 'error'], Response::HTTP_CONFLICT);
+        }
+
+        $fieldOption = new FieldOptions([
+            'text_option' => $fields['text_option'],
+            'integer_option' => $fields['integer_option'],
+            'reservation_id' => $fields['reservation_id'],
+            'form_field_id' => $fields['form_field_id']
+        ]);
+
+        Crud::saveModel($fieldOption);
     }
 
     /**
@@ -44,9 +62,9 @@ class FieldOptionsController extends Controller
      * @param  \App\Models\FieldOptions  $fieldOptions
      * @return \Illuminate\Http\Response
      */
-    public function show(FieldOptions $fieldOptions)
+    public function show($id)
     {
-        //
+        return Crud::showModel(FieldOptions::find($id));
     }
 
     /**
@@ -78,8 +96,8 @@ class FieldOptionsController extends Controller
      * @param  \App\Models\FieldOptions  $fieldOptions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FieldOptions $fieldOptions)
+    public function destroy($id)
     {
-        //
+        return Crud::destroyModel(FieldOptions::find($id));
     }
 }

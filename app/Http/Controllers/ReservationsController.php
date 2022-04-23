@@ -5,6 +5,7 @@ require_once('enum/ReservationStates.php');
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
+use App\Util\DateUtil;
 use App\Models\Reservations;
 use Illuminate\Http\Request;
 
@@ -40,11 +41,15 @@ class ReservationsController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            "price" => "decimal|required"
+            "price" => "decimal|required",
+            'provider_service_id' => 'numeric|required'
         ]);
 
         $reservation = new Reservations([
-            "price" => $fields["price"]
+            'price' => $fields['price'],
+            'provider_service_id' => $fields['provider_service_id'],
+            'state' => RESERVATION_READY,
+            'creation_date' => DateUtil::mysqlNow()
         ]);
 
         return Crud::saveModel($reservation);

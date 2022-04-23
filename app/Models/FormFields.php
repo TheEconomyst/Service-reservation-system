@@ -15,6 +15,8 @@ class FormFields extends Model
         'name',
         'field_type',
         'is_mandatory',
+        'attached_data_type',
+        'reservation_form_id'
     ];
 
     public function reservationForm() {

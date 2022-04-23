@@ -36,7 +36,19 @@ class FieldChoicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'form_field_id' => 'required|numeric',
+            'resevation_id' => 'required|numeric',
+            'choice' => 'required|string'
+        ]);
+
+        $fieldChoice = new FieldChoices([
+            'form_field_id' => $fields['form_field_id'],
+            'resevation_id' => $fields['resevation_id'],
+            'choice' => $fields['choice']
+        ]);
+
+        return Crud::saveModel($fieldChoice);
     }
 
     /**

@@ -6,32 +6,52 @@ use Illuminate\Http\Request;
 
 class Crud
 {
-    public static function showModel($model)
+    public static function showModel($model, $modelName = null)
     {
         if ($model === null) {
-            return response('', Response::HTTP_NOT_FOUND);
+            return response(['status' => 'not_found'], Response::HTTP_NOT_FOUND);
         } else {
-            return response($model, Repsonse::HTTP_OK);
+            $responseObj = ['status' => 'ok'];
+
+            if ($modelName !== null) {
+                $responseObj[$modelName] = $model;
+            } else {
+                $responseObj['data'] = $model;
+            }
+
+            return response($responseObj, Repsonse::HTTP_OK);
         }
     }
 
     public static function destroyModel($model)
     {
         if ($model === null) {
-            return response('', Response::HTTP_NOT_FOUND);
+            return response(['status' => 'ok'], Response::HTTP_NOT_FOUND);
         } else {
             $model->delete();
-            return response('', Response::HTTP_OK);
+            return response(['status' => 'error'], Response::HTTP_OK);
         }
     }
 
-    public static function saveModel($model)
+    public static function saveModel($model, $modelName = null)
     {
         if ($model->save()) {
-            return response($model, Response::HTTP_CREATED);
+            $responseObj = ['status' => 'ok'];
+
+            if ($modelName !== null) {
+                $responseObj[$modelName] = $model;
+            } else {
+                $responseObj['data'] = $model;
+            }
+
+            return response($responseObj, Response::HTTP_CREATED);
         } else {
-            return response('', Response::HTTP_CONFLICT);
+            return invalidCreationDataResponse();
         }
+    }
+
+    public static function invalidCreationDataResponse() {
+        return response(['status' => 'error'], Response::HTTP_CONFLICT);
     }
 }
 

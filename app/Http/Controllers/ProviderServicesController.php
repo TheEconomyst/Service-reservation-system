@@ -36,7 +36,21 @@ class ProviderServicesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'duration' => 'required|numeric',
+            'price' => 'required|decimal',
+            'service_provider_id' => 'required|numeric',
+            'service_id' => 'required|numeric'
+        ]);
+
+        $providerService = new ProviderServices([
+            'duration' => $fields['duration'],
+            'price' => $fields['price'],
+            'service_provider_id' => $fields['service_provider_id'],
+            'service_id' => $fields['service_id']
+        ]);
+
+        return Crud::saveModel($providerService);
     }
 
     /**

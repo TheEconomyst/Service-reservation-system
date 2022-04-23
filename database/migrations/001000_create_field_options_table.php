@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('text_option');
             $table->integer('integer_option');
-            $table->foreignId('resevation_id')->constrained('reservations');
+            $table->foreignId('reservation_id')->constrained('reservations');
             $table->foreignId('form_field_id')->constrained('form_fields');
         });
     }

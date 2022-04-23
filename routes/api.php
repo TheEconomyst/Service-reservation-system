@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ServiceProviderController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\WorkScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,13 @@ Route::group(['middleware'=>['auth:sanctum']], function(){
 });
 
 Route::get('/users',[\App\Http\Controllers\AuthController::class,'index']);
+
 Route::get('/service_providers', [ServiceProviderController::class, 'index']);
 Route::get('/service_providers/{id}', [ServiceProviderController::class, 'show']);
 Route::post('/service_providers', [ServiceProviderController::class, 'create']);
 Route::delete('/service_providers/{id}', [ServiceProviderController::class, 'destroy']);
+
+Route::get('/work_schedules', [WorkScheduleController::class, 'index']);
+Route::get('/work_schedules/{id}', [WorkScheduleController::class, 'show']);
+Route::post('/work_schedules', [WorkScheduleController::class, 'create']);
+Route::delete('/work_schedules/{id}', [WorkScheduleController::class, 'destroy']);

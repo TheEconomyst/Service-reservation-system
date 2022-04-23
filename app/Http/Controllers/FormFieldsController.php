@@ -23,9 +23,29 @@ class FormFieldsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'field_type' => 'required|numeric',
+            'is_mandatory' => 'required|boolean',
+            'reservation_form_id' => 'required|numeric',
+            'attached_data_type' => 'required|numeric'
+        ]);
+
+        if (!isValidAttachedDataType($fields['attached_data_type'])) {
+            return invalidCreationDataResponse();
+        }
+
+        $formField = new FormFields([
+            'name' => $fields['name'],
+            'field_type' => $fields['field_type'],
+            'is_mandatory' => $fields['is_mandatory'],
+            'reservation_form_id' => $fields['reservation_form_id']
+            'attached_data_type' => $fields['attached_data_type']
+        ]);
+
+        return Crud::saveModel($formField);
     }
 
     /**

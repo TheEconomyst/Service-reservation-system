@@ -23,9 +23,21 @@ class WorkScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'time_from' => 'required|numeric',
+            'time_to' => 'required|numeric',
+            'service_provider_id' => 'required|numeric'
+        ]);
+
+        $workSchedule = new WorkSchedule([
+            'time_from' => $fields['time_from'],
+            'time_to' => $fields['time_to'],
+            'service_provider_id' => $fields['service_provider_id']
+        ]);
+
+        return Crud::saveModel($workSchedule);
     }
 
     /**
