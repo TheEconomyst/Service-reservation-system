@@ -37,7 +37,17 @@ class CompaniesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'company_code' => 'required|string'
+        ]);
+
+        $company = new Companies([
+            'name' => $fields['name'],
+            'company_code' => $fields['company_code']
+        ]);
+
+        return Crud::saveModel($company, 'company');
     }
 
     /**

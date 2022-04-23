@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\CompaniesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReservationFormsController;
@@ -38,6 +39,16 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
 Route::get('/users',[AuthController::class,'index']);
 
+Route::get('/companies', [CompaniesController::class, 'index']);
+Route::get('/companies/{id}', [CompaniesController::class, 'show']);
+Route::post('/companies', [CompaniesController::class, 'store']);
+Route::delete('/companies/{id}', [CompaniesController::class, 'destroy']);
+
+Route::get('/field_choices', [FieldChoicesController::class, 'index']);
+Route::get('/companies/{id}', [FieldChoicesController::class, 'show']);
+Route::post('/companies', [FieldChoicesController::class, 'store']);
+Route::delete('/companies/{id}', [FieldChoicesController::class, 'destroy']);
+
 Route::get('/reservations', [ReservationsController::class, 'index']);
 Route::get('/reservations/{id}', [ReservationsController::class], 'show');
 Route::post('/reservations', [ReservationsController::class, 'store']);
@@ -57,4 +68,3 @@ Route::get('/work_schedules', [WorkScheduleController::class, 'index']);
 Route::get('/work_schedules/{id}', [WorkScheduleController::class, 'show']);
 Route::post('/work_schedules', [WorkScheduleController::class, 'store']);
 Route::delete('/work_schedules/{id}', [WorkScheduleController::class, 'destroy']);
-
