@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\Companies;
+use App\Models\Company;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return response(Companies::all(), Response::HTTP_OK);
+        return response(Company::all(), Response::HTTP_OK);
     }
 
     /**
@@ -42,7 +42,7 @@ class CompanyController extends Controller
             'company_code' => 'required|string'
         ]);
 
-        $company = new Companies([
+        $company = new Company([
             'name' => $fields['name'],
             'company_code' => $fields['company_code']
         ]);
@@ -53,21 +53,21 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\Company  $companies
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(Companies::find($id));
+        return Crud::showModel(Company::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\Company  $companies
      * @return \Illuminate\Http\Response
      */
-    public function edit(Companies $companies)
+    public function edit(Company $companies)
     {
         //
     }
@@ -76,10 +76,10 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\Company  $companies
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Companies $companies)
+    public function update(Request $request, Company $companies)
     {
         //
     }
@@ -87,11 +87,11 @@ class CompanyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\Company  $companies
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Companies $companies)
+    public function destroy(Company $companies)
     {
-        return Crud::destroyModel(Companies::find($id));
+        return Crud::destroyModel(Company::find($id));
     }
 }

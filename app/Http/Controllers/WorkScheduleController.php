@@ -93,6 +93,6 @@ class WorkScheduleController extends Controller
      */
     public function destroy($id)
     {
-        return Crud::destroyModel(WorkSchedule::find($id))
+        return Crud::destroyModel(WorkSchedule::find($id));
     }
 }

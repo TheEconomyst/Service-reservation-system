@@ -46,7 +46,7 @@ class User extends Authenticatable
         return $this->belongsTo(Company::class);
     }
 
-    public function service_provider() {
+    public function serviceProvider() {
         return $this->hasOne(ServiceProvider::class);
     }
 }

@@ -23,11 +23,11 @@ class FormField extends Model
         return $this->belongsTo(ReservationForm::class);
     }
 
-    public function formFieldOptions() {
+    public function fieldOptions() {
         return $this->hasMany(FieldOption::class);
     }
 
-    public function formFieldChoices() {
+    public function fieldChoices() {
         return $this->hasMany(FieldChoice::class);
     }
 }
