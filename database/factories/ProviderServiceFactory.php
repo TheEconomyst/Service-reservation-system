@@ -17,7 +17,8 @@ class ProviderServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'duration' => $this->faker->numberBetween(10, 120),
+            'price' => $this->faker->randomFloat(2, 10, 90)
         ];
     }
 }

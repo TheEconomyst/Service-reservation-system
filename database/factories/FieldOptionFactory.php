@@ -18,7 +18,7 @@ class FieldOptionFactory extends Factory
     {
         return [
             'text_option' => $this->faker->word(),
-            'integer_option' => $this->faker->number(),
+            'integer_option' => $this->faker->randomNumber(),
         ];
     }
 }

@@ -17,7 +17,8 @@ class WorkScheduleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'time_from' => $this->faker->unixTime(),
+            'time_to' => $this->faker->unixTime()
         ];
     }
 }

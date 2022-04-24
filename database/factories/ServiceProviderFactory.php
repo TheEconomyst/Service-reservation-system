@@ -17,7 +17,9 @@ class ServiceProviderFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'description' => $this->faker->sentence(),
+            'is_company_admin' => $this->faker->boolean(),
+            'is_active' => $this->faker->boolean(),
         ];
     }
 }

@@ -17,7 +17,9 @@ class ServiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'is_active' => $this->faker->boolean(),
+            'description' => $this->faker->sentence()
         ];
     }
 }

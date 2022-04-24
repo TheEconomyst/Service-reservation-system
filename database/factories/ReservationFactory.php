@@ -17,7 +17,9 @@ class ReservationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'creation_date' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'state' => $this->faker->numberBetween(1, 3),
+            'price' => $this->faker->randomFloat(2, 10, 90),
         ];
     }
 }

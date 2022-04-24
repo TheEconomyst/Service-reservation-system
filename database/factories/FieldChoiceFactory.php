@@ -17,7 +17,7 @@ class FieldChoiceFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'choice' => $this->faker->word()
         ];
     }
 }

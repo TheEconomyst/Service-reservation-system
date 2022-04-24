@@ -17,7 +17,8 @@ class CompanyFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->word(),
+            'company_code' => $this->faker->regexify('COMP[0-9]{5}')
         ];
     }
 }
