@@ -19,14 +19,14 @@ class Service extends Model
     ];
 
     public function company() {
-        return $this->belongsTo(Companies::class);
+        return $this->belongsTo(Company::class);
     }
 
     public function provider_services() {
-        return $this->belongsTo(ProviderServices::class);
+        return $this->belongsTo(ProviderService::class);
     }
 
     public function reservations() {
-        return $this->belongsTo(Reservations::class);
+        return $this->belongsTo(Reservation::class);
     }
 }

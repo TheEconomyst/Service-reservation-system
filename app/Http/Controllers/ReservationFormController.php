@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\FieldChoices;
+use App\Models\ReservationForm;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class FieldChoicesController extends Controller
+class ReservationFormController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class FieldChoicesController extends Controller
      */
     public function index()
     {
-        return response(FieldChoices::all(), Response::HTTP_OK);
+        return response(ReservationForm::all(), Response::HTTP_OK);
     }
 
     /**
@@ -37,38 +38,34 @@ class FieldChoicesController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'form_field_id' => 'required|numeric',
-            'resevation_id' => 'required|numeric',
-            'choice' => 'required|string'
+            "name" => "required|string"
         ]);
 
-        $fieldChoice = new FieldChoices([
-            'form_field_id' => $fields['form_field_id'],
-            'resevation_id' => $fields['resevation_id'],
-            'choice' => $fields['choice']
+        $form = new ReservationForm([
+            "name" => $fields["name"]
         ]);
 
-        return Crud::saveModel($fieldChoice);
+        return Crud::saveModel($form, 'form');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FieldChoices  $fieldChoices
+     * @param  \App\Models\ReservationForm  $reservationForms
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(FieldChoices::find($id));
+        return Crud::showModel(ReservationForm::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FieldChoices  $fieldChoices
+     * @param  \App\Models\ReservationForm  $reservationForms
      * @return \Illuminate\Http\Response
      */
-    public function edit(FieldChoices $fieldChoices)
+    public function edit(ReservationForm $reservationForms)
     {
         //
     }
@@ -77,10 +74,10 @@ class FieldChoicesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FieldChoices  $fieldChoices
+     * @param  \App\Models\ReservationForm  $reservationForms
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FieldChoices $fieldChoices)
+    public function update(Request $request, ReservationForm $reservationForms)
     {
         //
     }
@@ -88,11 +85,11 @@ class FieldChoicesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FieldChoices  $fieldChoices
+     * @param  \App\Models\ReservationForm  $reservationForms
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Crud::destroyModel(FieldChoices::find($id));
+        return Crud::destroyModel(ReservationForm::find($id));
     }
 }

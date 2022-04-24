@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ReservationForms extends Model
+class ReservationForm extends Model
 {
     use HasFactory;
 
-    $table = 'reservation_forms';
+    protected $table = 'reservation_forms';
 
-    $fillable = [
+    protected $fillable = [
         'name'
     ];
 
     public function formFields() {
-        return $this->hasMany('form_fields');
+        return $this->hasMany(FormField::class);
     }
 }

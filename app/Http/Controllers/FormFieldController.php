@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\FormFields;
+use App\Models\FormField;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class FormFieldsController extends Controller
+class FormFieldController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class FormFieldsController extends Controller
      */
     public function index()
     {
-        return response(FormFields::all(), Response::HTTP_OK);
+        return response(FormField::all(), Response::HTTP_OK);
     }
 
     /**
@@ -49,11 +50,11 @@ class FormFieldsController extends Controller
             );
         }
 
-        $formField = new FormFields([
+        $formField = new FormField([
             'name' => $fields['name'],
             'field_type' => $fields['field_type'],
             'is_mandatory' => $fields['is_mandatory'],
-            'reservation_form_id' => $fields['reservation_form_id']
+            'reservation_form_id' => $fields['reservation_form_id'],
             'attached_data_type' => $fields['attached_data_type']
         ]);
 
@@ -63,21 +64,21 @@ class FormFieldsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FormFields  $formFields
+     * @param  \App\Models\FormField  $formFields
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(FormFields::find($id));
+        return Crud::showModel(FormField::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FormFields  $formFields
+     * @param  \App\Models\FormField  $formFields
      * @return \Illuminate\Http\Response
      */
-    public function edit(FormFields $formFields)
+    public function edit(FormField $formFields)
     {
         //
     }
@@ -86,10 +87,10 @@ class FormFieldsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FormFields  $formFields
+     * @param  \App\Models\FormField  $formFields
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FormFields $formFields)
+    public function update(Request $request, FormField $formFields)
     {
         //
     }
@@ -97,11 +98,11 @@ class FormFieldsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FormFields  $formFields
+     * @param  \App\Models\FormField  $formFields
      * @return \Illuminate\Http\Response
      */
-    public function destroy(FormFields $formFields)
+    public function destroy(FormField $formFields)
     {
-        return Crud::destroyModel(FormFields::find($id));
+        return Crud::destroyModel(FormField::find($id));
     }
 }

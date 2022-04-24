@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\FieldOptions;
+use App\Models\FieldOption;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class FieldOptionsController extends Controller
+class FieldOptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class FieldOptionsController extends Controller
      */
     public function index()
     {
-        return response(FieldOptions::all(), Response::HTTP_OK);
+        return response(FieldOption::all(), Response::HTTP_OK);
     }
 
     /**
@@ -39,7 +40,7 @@ class FieldOptionsController extends Controller
             );
         }
 
-        $fieldOption = new FieldOptions([
+        $fieldOption = new FieldOption([
             'text_option' => $fields['text_option'],
             'integer_option' => $fields['integer_option'],
             'reservation_id' => $fields['reservation_id'],
@@ -63,21 +64,21 @@ class FieldOptionsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\FieldOptions  $fieldOptions
+     * @param  \App\Models\FieldOption  $fieldOptions
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(FieldOptions::find($id));
+        return Crud::showModel(FieldOption::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\FieldOptions  $fieldOptions
+     * @param  \App\Models\FieldOption  $fieldOptions
      * @return \Illuminate\Http\Response
      */
-    public function edit(FieldOptions $fieldOptions)
+    public function edit(FieldOption $fieldOptions)
     {
         //
     }
@@ -86,10 +87,10 @@ class FieldOptionsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\FieldOptions  $fieldOptions
+     * @param  \App\Models\FieldOption  $fieldOptions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FieldOptions $fieldOptions)
+    public function update(Request $request, FieldOption $fieldOptions)
     {
         //
     }
@@ -97,11 +98,11 @@ class FieldOptionsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\FieldOptions  $fieldOptions
+     * @param  \App\Models\FieldOption  $fieldOptions
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Crud::destroyModel(FieldOptions::find($id));
+        return Crud::destroyModel(FieldOption::find($id));
     }
 }

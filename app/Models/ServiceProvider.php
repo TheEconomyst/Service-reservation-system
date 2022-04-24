@@ -27,6 +27,6 @@ class ServiceProvider extends Model
     }
 
     public function providerServices() {
-        return $this->hasMany(ProviderServices::class);
+        return $this->hasMany(ProviderService::class);
     }
 }

@@ -1,12 +1,16 @@
 <?php
 
+require_once('enum/ReservationStates.php');
+
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\ReservationForms;
+use App\Util\DateUtil;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class ReservationFormsController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +19,8 @@ class ReservationFormsController extends Controller
      */
     public function index()
     {
-        return response(ReservationForms::all(), Response::HTTP_OK);
+        $reservations = Reservation::all();
+        return response($reservations, Response::HTTP_OK);
     }
 
     /**
@@ -23,9 +28,9 @@ class ReservationFormsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        /* TODO */
     }
 
     /**
@@ -37,34 +42,38 @@ class ReservationFormsController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            "name" => "required|string"
+            "price" => "decimal|required",
+            'provider_service_id' => 'numeric|required'
         ]);
 
-        $form = new ReservationForms([
-            "name" => $fields["name"]
+        $reservation = new Reservation([
+            'price' => $fields['price'],
+            'provider_service_id' => $fields['provider_service_id'],
+            'state' => RESERVATION_READY,
+            'creation_date' => DateUtil::mysqlNow()
         ]);
 
-        return Crud::saveModel($form, 'form');
+        return Crud::saveModel($reservation);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ReservationForms  $reservationForms
+     * @param  \App\Models\Reservation  $reservations
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(ReservationForms::find($id));
+        return Crud::showModel(Reservation::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ReservationForms  $reservationForms
+     * @param  \App\Models\Reservation  $reservations
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReservationForms $reservationForms)
+    public function edit(Reservation $reservations)
     {
         //
     }
@@ -73,10 +82,10 @@ class ReservationFormsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ReservationForms  $reservationForms
+     * @param  \App\Models\Reservation  $reservations
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReservationForms $reservationForms)
+    public function update(Request $request, Reservation $reservations)
     {
         //
     }
@@ -84,11 +93,11 @@ class ReservationFormsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ReservationForms  $reservationForms
+     * @param  \App\Models\Reservation  $reservations
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Crud::destroyModel(ReservationForms::find($id));
+        return Crud::destroyModel(Reservation::find($id));
     }
 }

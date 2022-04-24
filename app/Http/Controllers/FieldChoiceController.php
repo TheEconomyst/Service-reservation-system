@@ -1,15 +1,13 @@
 <?php
 
-require_once('enum/ReservationStates.php');
-
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Util\DateUtil;
-use App\Models\Reservations;
+use App\Models\FieldChoice;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class ReservationsController extends Controller
+class FieldChoiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +16,7 @@ class ReservationsController extends Controller
      */
     public function index()
     {
-        $reservations = Reservations::all();
-        return response($reservations, Response::HTTP_OK);
+        return response(FieldChoice::all(), Response::HTTP_OK);
     }
 
     /**
@@ -27,9 +24,9 @@ class ReservationsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        /* TODO */
+        //
     }
 
     /**
@@ -41,38 +38,38 @@ class ReservationsController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            "price" => "decimal|required",
-            'provider_service_id' => 'numeric|required'
+            'form_field_id' => 'required|numeric',
+            'resevation_id' => 'required|numeric',
+            'choice' => 'required|string'
         ]);
 
-        $reservation = new Reservations([
-            'price' => $fields['price'],
-            'provider_service_id' => $fields['provider_service_id'],
-            'state' => RESERVATION_READY,
-            'creation_date' => DateUtil::mysqlNow()
+        $fieldChoice = new FieldChoice([
+            'form_field_id' => $fields['form_field_id'],
+            'resevation_id' => $fields['resevation_id'],
+            'choice' => $fields['choice']
         ]);
 
-        return Crud::saveModel($reservation);
+        return Crud::saveModel($fieldChoice);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Reservations  $reservations
+     * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(Reservations::find($id));
+        return Crud::showModel(FieldChoice::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Reservations  $reservations
+     * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reservations $reservations)
+    public function edit(FieldChoices $fieldChoices)
     {
         //
     }
@@ -81,10 +78,10 @@ class ReservationsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Reservations  $reservations
+     * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reservations $reservations)
+    public function update(Request $request, FieldChoice $fieldChoices)
     {
         //
     }
@@ -92,11 +89,11 @@ class ReservationsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Reservations  $reservations
+     * @param  \App\Models\FieldChoices  $fieldChoices
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        return Crud::destroyModel(Reservations::find($id));
+        return Crud::destroyModel(FieldChoice::find($id));
     }
 }

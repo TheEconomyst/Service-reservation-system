@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Util\Crud;
-use App\Models\Companies;
-use Illuminate\Http\Response;
+use App\Models\ProviderService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
-class CompaniesController extends Controller
+class ProviderServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class CompaniesController extends Controller
      */
     public function index()
     {
-        return response(Companies::all(), Response::HTTP_OK);
+        return response(ProviderService::all(), Response::HTTP_OK);
     }
 
     /**
@@ -38,36 +38,40 @@ class CompaniesController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'name' => 'required|string',
-            'company_code' => 'required|string'
+            'duration' => 'required|numeric',
+            'price' => 'required|decimal',
+            'service_provider_id' => 'required|numeric',
+            'service_id' => 'required|numeric'
         ]);
 
-        $company = new Companies([
-            'name' => $fields['name'],
-            'company_code' => $fields['company_code']
+        $providerService = new ProviderService([
+            'duration' => $fields['duration'],
+            'price' => $fields['price'],
+            'service_provider_id' => $fields['service_provider_id'],
+            'service_id' => $fields['service_id']
         ]);
 
-        return Crud::saveModel($company, 'company');
+        return Crud::saveModel($providerService);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\ProviderService  $providerServices
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Crud::showModel(Companies::find($id));
+        return Crud::showModel(ProviderService::find($id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\ProviderService  $providerServices
      * @return \Illuminate\Http\Response
      */
-    public function edit(Companies $companies)
+    public function edit(ProviderService $providerServices)
     {
         //
     }
@@ -76,10 +80,10 @@ class CompaniesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\ProviderService  $providerServices
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Companies $companies)
+    public function update(Request $request, ProviderService $providerServices)
     {
         //
     }
@@ -87,11 +91,11 @@ class CompaniesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Companies  $companies
+     * @param  \App\Models\ProviderService  $providerServices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Companies $companies)
+    public function destroy($id)
     {
-        return Crud::destroyModel(Companies::find($id));
+        return Crud::destroyModel(ProviderService::find($id));
     }
 }

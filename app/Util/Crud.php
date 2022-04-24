@@ -50,11 +50,13 @@ class Crud
         }
     }
 
-    public static function invalidCreationDataResponse() {
+    public static function invalidCreationDataResponse()
+    {
         return response(['status' => 'error'], Response::HTTP_CONFLICT);
     }
 
-    public static function respondInvalidFormData($cause) {
+    public static function respondInvalidFormData($cause)
+    {
         return response(
             [
                 'status' => 'error',

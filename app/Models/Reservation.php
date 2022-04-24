@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Reservations extends Model
+class Reservation extends Model
 {
     use HasFactory;
 
@@ -18,7 +18,7 @@ class Reservations extends Model
     ];
 
     public function providerService() {
-        return $this->belongsTo(ProviderServices::class);
+        return $this->belongsTo(ProviderService::class);
     }
 
     public function service() {
@@ -26,10 +26,10 @@ class Reservations extends Model
     }
 
     public function fieldChoices() {
-        return $this->belongsToMany(FieldChoices::class);
+        return $this->belongsToMany(FieldChoice::class);
     }
 
     public function fieldOptions() {
-        return $this->belongsTo(FieldOptions::class);
+        return $this->belongsTo(FieldOption::class);
     }
 }

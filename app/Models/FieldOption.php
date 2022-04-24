@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FieldOptions extends Model
+class FieldOption extends Model
 {
     use HasFactory;
 
@@ -19,10 +19,10 @@ class FieldOptions extends Model
     ];
 
     public function formField() {
-        return $this->belongsTo(FormFields::class);
+        return $this->belongsTo(FormField::class);
     }
 
     public function reservation() {
-        return $this->belongsTo(Reservations::class);
+        return $this->belongsTo(Reservation::class);
     }
 }

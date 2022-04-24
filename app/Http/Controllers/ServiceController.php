@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Util\Crud;
 use App\Models\Service;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 
 class ServiceController extends Controller
 {
