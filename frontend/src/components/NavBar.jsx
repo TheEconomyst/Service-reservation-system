@@ -40,18 +40,28 @@ function NavBar() {
         <>
             <div className={classes.root}>
                 <AppBar position="static">
-                    <Toolbar className={classes.toolbar}>
+                    <Toolbar  style={{display:'flex', flexDirection:'row', justifyContent:'space-between'}} className={classes.toolbar}>
+                        <div style={{display:'flex', flexDirection:'row', alignItems:'center'}}>
                         <CameraIcon className={classes.icons} />
                         <h1 className={classes.title}>Form Creator </h1>
-                        <Button href="/login" className={classes.btn}>
-                            <LockOpenIcon /> PRISIJUNGTI
-                        </Button>
-                        <Button href="/newform" className={classes.btn}>
-                            <CreateIcon /> SUKURTI NAUJĄ FORMĄ
-                        </Button>
-                        <Button href="/" className={classes.btn}>
+                        </div>
+                        <div>
+                        <Button href="/" variant="contained" className={classes.btn}>
                             <HomeIcon /> NAMAI
                         </Button>
+                        <Button href="/newform" variant="contained" className={classes.btn}>
+                            <CreateIcon /> SUKURTI NAUJĄ FORMĄ
+                        </Button>
+                        <Button href="/services" variant="contained" className={classes.btn}>
+                            <CreateIcon /> VALDYTI PASLAUGAS
+                        </Button>
+                        <Button href="/serviceworkers" variant="contained" className={classes.btn}>
+                            <CreateIcon /> VALDYTI PASLAUGŲ TEIKĖJUS
+                        </Button>
+                        <Button href="/login" variant="contained" className={classes.btn}>
+                            <LockOpenIcon /> PRISIJUNGTI
+                        </Button>
+                        </div>
                     </Toolbar>
                 </AppBar>
                 <Toolbar />
