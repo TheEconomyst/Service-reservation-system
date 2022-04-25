@@ -78,6 +78,7 @@ export const ServiceWorkersListView = () => {
                         <Button
                             variant="contained"
                             color="primary"
+                            href="/"
                             style={{ marginRight: "15px" }}
                         >
                             ATGAL

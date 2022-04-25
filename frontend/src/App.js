@@ -11,6 +11,8 @@ import { ServiceAddView } from "./pages/services/ServiceAddView";
 import { ServiceEditView } from "./pages/services/ServiceEditView";
 import { ServiceWorkersListView } from "./pages/service_workers/ServiceWorkersListView";
 import { ServiceWorkerAddView } from "./pages/service_workers/ServiceWorkerAddView";
+import NewFormPage from "./pages/forms/NewFormPage";
+import { HomePage } from "./pages/home/HomePage";
 
 function App() {
     return (
@@ -19,6 +21,7 @@ function App() {
                 <NavBar />
                 <BrowserRouter>
                     <Routes>
+                        <Route exact path="/" element={<HomePage/>}/>
                         <Route exact path={"/login"} element={<Login />} />
                         <Route
                             exact
@@ -50,6 +53,7 @@ function App() {
                             path={"/serviceworkers/add"}
                             element={<ServiceWorkerAddView />}
                         />
+                        <Route exact path="/newform" element={<NewFormPage/>}/>
                     </Routes>
                 </BrowserRouter>
             </ThemeProvider>
