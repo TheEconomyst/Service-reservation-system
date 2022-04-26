@@ -3,6 +3,7 @@
 namespace App\Util;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class Crud
 {
@@ -19,7 +20,7 @@ class Crud
                 $responseObj['data'] = $model;
             }
 
-            return response($responseObj, Repsonse::HTTP_OK);
+            return response($responseObj, Response::HTTP_OK);
         }
     }
 
@@ -46,7 +47,7 @@ class Crud
 
             return response($responseObj, Response::HTTP_CREATED);
         } else {
-            return invalidCreationDataResponse();
+            return Crud::invalidCreationDataResponse();
         }
     }
 

@@ -43,6 +43,7 @@ export class Requests {
     }
     async getService(id) {
         let res = await AxiosInterface.get(`/services/${id}`);
+        console.log(res);
         return res.data;
     }
     async getCompanies() {

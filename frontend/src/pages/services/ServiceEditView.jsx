@@ -53,16 +53,15 @@ export const ServiceEditView = () => {
     const [success, setSuccess] = useState(false);
     const requests = new Requests();
     useEffect(async () => {
-        let res = await requests.getCompanies();
-        requests.getService(id).then((res) => {
+        let comp = await requests.getCompanies();
+        console.log(comp);
+        setCompanies(comp);
+        let res = await requests.getService(id);
             console.log(res);
             setName(res.service.name);
             setDesc(res.service.description);
             setActive(res.service.is_active == 1 ? true : false);
             setCompany(res.service.company_id);
-        });
-        console.log(res);
-        setCompanies(res);
     }, []);
 
     const handleSave = () => {
