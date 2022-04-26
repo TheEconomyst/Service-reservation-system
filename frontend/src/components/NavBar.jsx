@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import HomeIcon from "@mui/icons-material/Home";
 import CreateIcon from "@mui/icons-material/Create";
+import Cookies from "universal-cookie/es6";
 
 const useStyles = makeStyles({
     title: {
@@ -36,6 +37,13 @@ const useStyles = makeStyles({
 function NavBar() {
     const classes = useStyles();
 
+    const cookies = new Cookies();
+
+    const handleLogout = ()=>
+    {
+        cookies.remove("Authorization", { path: "/" });
+    }
+
     return (
         <>
             <div className={classes.root}>
@@ -58,9 +66,13 @@ function NavBar() {
                         <Button href="/serviceworkers" variant="contained" className={classes.btn}>
                             <CreateIcon /> VALDYTI PASLAUGŲ TEIKĖJUS
                         </Button>
-                        <Button href="/login" variant="contained" className={classes.btn}>
+                        {cookies.get("Authorization") === undefined ? <Button href="/login" variant="contained" className={classes.btn}>
                             <LockOpenIcon /> PRISIJUNGTI
                         </Button>
+                        :                         <Button onClick={()=>handleLogout()} variant="contained" className={classes.btn}>
+                        <LockOpenIcon /> ATSIJUNGTI
+                    </Button>}
+                    
                         </div>
                     </Toolbar>
                 </AppBar>
